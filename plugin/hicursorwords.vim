@@ -80,8 +80,8 @@ endif
 
 augroup HiCursorWords
     autocmd!
-    autocmd  CursorMoved,CursorMovedI  *  call s:HiCursorWords__startHilighting()
-    autocmd  WinLeave * call s:HiCursorWords__stopHilighting()
+    autocmd  CursorMoved *  call s:HiCursorWords__startHilighting()
+    autocmd  WinLeave,InsertEnter * call s:HiCursorWords__stopHilighting()
 augroup END
 
 function! s:HiCursorWords__getHiName(linenum, colnum)
@@ -140,7 +140,7 @@ function! s:HiCursorWords__startHilighting()
     let &updatetime = g:HiCursorWords_delay
     augroup HiCursorWordsUpdate
         autocmd!
-        autocmd CursorHold,CursorHoldI  *
+        autocmd CursorHold *
                     \ if exists('b:HiCursorWords__oldUpdatetime') | let &updatetime = b:HiCursorWords__oldUpdatetime | endif
                     \ | call s:HiCursorWords__execute()
     augroup END
